@@ -1,0 +1,16 @@
+version: '2'
+services:
+  disqus-proxy-server:
+    build: .
+    image: ycwalker/disqus-proxy-server
+    restart: always
+    container_name: disqus-proxy-server
+    environment:
+      - SHORT_NAME=your disqus short name
+      - API_SECRECT=your api secret
+#       生产环境为PROD
+      - NODE_ENV=PROD
+#      docker设置环境log输入至console，可以进入容器后执行pm2 logs查看日志
+      - LOG=console
+    ports:
+      - "5209:5209"

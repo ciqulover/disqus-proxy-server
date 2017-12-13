@@ -1,0 +1,33 @@
+{
+  "name": "disqus-proxy-server",
+  "version": "0.1.0",
+  "main": "index",
+  "keywords": [
+    "diqus proxy",
+    "disqus"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ciqulover/disqus-proxy-server"
+  },
+  "author": {
+    "name": "ciqulover",
+    "email": "ciqulover@gmail.com",
+    "url": "ycwalker.com"
+  },
+  "dependencies": {
+    "kcors": "2",
+    "koa": "^2.2.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-router": "^7.2.0",
+    "log4js": "^1.1.1",
+    "node-fetch": "^1.7.3",
+    "socks5-node-fetch": "^0.0.4"
+  },
+  "scripts": {
+    "server": "node server.js",
+    "pm2server": "pm2 start server.js",
+    "dev": "NODE_ENV=DEV node server.js"
+  },
+  "license": "MIT"
+}
