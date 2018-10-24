@@ -16,18 +16,19 @@
     "url": "ycwalker.com"
   },
   "dependencies": {
+    "hexo-disqus-proxy": "^2.0.0",
     "kcors": "2",
     "koa": "^2.2.0",
     "koa-bodyparser": "^4.2.0",
     "koa-router": "^7.2.0",
-    "log4js": "^1.1.1",
-    "node-fetch": "^1.7.3",
+    "log4js": "^3.0.6",
+    "node-fetch": "^2.2.0",
     "socks5-node-fetch": "^0.0.4"
   },
   "scripts": {
     "server": "node server.js",
-    "pm2server": "pm2 start server.js",
-    "dev": "NODE_ENV=DEV node server.js"
+    "start": "pm2 start server.js",
+    "dev": "NODE_ENV=DEV pm2 start server.js --watch"
   },
   "license": "MIT"
 }

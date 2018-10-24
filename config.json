@@ -1,0 +1,7 @@
+{
+  "port": 5509,
+  "api_secret": "",
+  "shortname": "",
+  "log_path": null,
+  "proxy": false
+}
