@@ -1,7 +1,0 @@
-{
-  "port": 5509,
-  "api_secret": "kgzfbXGG5KM8AzEnMwc7VLSxW6aUGjwQdzIWasJn2nY4p4Vj5AS4RLRaBcX1wtIW",
-  "shortname": "ciqu",
-  "log_path": null,
-  "proxy": true
-}
