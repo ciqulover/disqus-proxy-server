@@ -1,5 +1,6 @@
 disqis-proxy.log
 dev.config.js
+dev.config.json
 node_modules
 
 # misc
