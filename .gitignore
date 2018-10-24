@@ -2,6 +2,8 @@ disqis-proxy.log
 dev.config.js
 dev.config.json
 node_modules
+log
+yarn.lock
 
 # misc
 .DS_Store
