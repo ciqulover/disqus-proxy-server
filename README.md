@@ -16,6 +16,59 @@
 
 **配置提供`node`启动和`docker`或者`docker-compose`的方式启动，推荐`docker`或者`docker-compose`**
 
+### 使用`nodejs`
+
+需要`Node.js`版本`7.6`以上。
+
+##### 在服务器上clone代码:
+```
+https://github.com/ciqulover/disqus-proxy-server
+```
+##### 安装依赖 
+```
+npm install
+```
+
+##### 配置`server`目录下的`config.json`
+``` js
+{
+  // 服务端端口，需要与disqus-proxy前端设置一致
+    port: 5509,
+  
+    // 你的diqus secret key
+    api_secret: 'your secret key',
+  
+    // 你的website的 shortname 名称 比如在你的disqus安装代码中 有这样一句脚本：
+    // s.src = 'https://test-eo9kkdlcze.disqus.com/embed.js';
+    // 那么你的disqus 的shortname 就是 test-eo9kkdlcze
+    shortname: 'ciqu',
+  
+    // 日志路径，可以填写绝对路径，默认当前目录下自动创建log目录
+    log_path: null
+    
+    只有使用nginx反向代理node时，为true，只监听否则本地端口127.0.0.1，默认false，监听0.0.0.0
+    proxy: false
+}
+
+```
+
+##### 启动
+
+测试启动：
+```
+node server.js
+```
+
+正式使用时需要用`pm2`启动，来守护服务端进程
+
+```
+npm install pm2 -g
+pm2 start server.js
+```
+
+-- 到此结束，检测评论是否正常显示 --
+
+
 ### 使用 docker
 
 以下命令中替换你的`API_SECRECT`和`SHORT_NAME`，外部端口可自定义，需要和前端保持一致
@@ -40,74 +93,22 @@ ycwalker/disqus-proxy-server
 docker-compose up -d
 ```
 
-### 使用`nodejs`
-
-需要`Node.js`版本`7.6`以上。
-
-##### 在服务器上clone代码:
-```
-https://github.com/ciqulover/disqus-proxy-server
-```
-##### 安装依赖 
-```
-npm install
-```
-
-##### 配置`server`目录下的`config.js`
-``` js
-module.exports = {
-  // 服务端端口，需要与disqus-proxy前端设置一致
-    port: 5509,
-  
-    // 你的diqus secret key
-    api_secret: 'your secret key',
-  
-    // 你的website的 shortname 名称 比如在你的disqus安装代码中 有这样一句脚本：
-    // s.src = 'https://test-eo9kkdlcze.disqus.com/embed.js';
-    // 那么你的disqus 的shortname 就是 test-eo9kkdlcze
-    shortname: 'ciqu',
-  
-    // 服务端socks5代理转发，便于在本地测试，生产环境通常为null
-    // socks5Proxy: {
-    //   host: 'localhost',
-    //   port: 1086
-    // },
-  
-    socks5Proxy: null,
-  
-    // 日志输出位置,输出到文件或控制台 'file' | 'console'
-    log: 'console'
-}
-
-```
-
-##### 启动
-```
-node index.js
-```
-
-推荐用`pm2`在生产环境启动，否则你断开ssh，node进程就终止了
-
-```
-npm install pm2 -g
-pm2 start index.js
-```
-如果你在配置文件中选择`log`类型为`file`, 那么输出的日志文件将在默认为server目录下的`disqus-proxy.log`
-
 ### 其他
 
 如果需要https访问，我们可以用nginx来反向代理disqus proxy.
 
+其中disqus-proxy.domain.com是你的反向代理的域名，配置好证书位置。其中5509端口是在config.json里配置的端口
+
 ```nginx
 server {
     listen 443 ssl;
-    server_name disqus.domain.com;
-    ssl_certificate /etc/ssl/startssl/1_disqus.domain.com_bundle.crt;
-    ssl_certificate_key /etc/ssl/startssl/2_disqus.domain.com.key;
+    server_name disqus-proxy.domain.com;
+    ssl_certificate /etc/ssl/disqus-proxy.domain.com.crt;
+    ssl_certificate_key /etc/ssl/disqus-proxy.domain.com.key;
     
     location / {
         proxy_set_header  X-Real-IP  $remote_addr;
-        proxy_pass http://host:port$request_uri;
+        proxy_pass http://127.0.0.1:5509$request_uri;
     }
 }
 ```
