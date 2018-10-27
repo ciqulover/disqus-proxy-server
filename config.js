@@ -18,7 +18,3 @@ if (process.env.API_SECRECT) config.api_secret = process.env.API_SECRECT
 if (process.env.SHORT_NAME) config.shortname = process.env.SHORT_NAME
 
 module.exports = config
-
-
-
-
