@@ -16,7 +16,6 @@ config.api_key = 'E8Uh5l5fHZ6gD8U3KycjAIAk46f68Zw7C6eW8WSjZvCLXebZ7p0r1yrYDrLilk
 if (process.env.PORT) config.port = process.env.PORT
 if (process.env.API_SECRECT) config.api_secret = process.env.API_SECRECT
 if (process.env.SHORT_NAME) config.shortname = process.env.SHORT_NAME
-if (process.env.LOG) config.log = process.env.LOG
 
 module.exports = config
 

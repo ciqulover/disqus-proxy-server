@@ -33,15 +33,15 @@ npm install
 ``` js
 {
   // 服务端端口，需要与disqus-proxy前端设置一致
-    port: 5509,
+    "port": 5509,
   
     // 你的diqus secret key
-    api_secret: 'your secret key',
+    "api_secret": "your secret key",
   
     // 你的website的 shortname 名称 比如在你的disqus安装代码中 有这样一句脚本：
     // s.src = 'https://test-eo9kkdlcze.disqus.com/embed.js';
     // 那么你的disqus 的shortname 就是 test-eo9kkdlcze
-    shortname: 'ciqu',
+    "shortname": "shortname",
   
     // 日志路径，可以填写绝对路径，默认当前目录下自动创建log目录
     log_path: null
@@ -67,31 +67,6 @@ pm2 start server.js
 ```
 
 -- 到此结束，检测评论是否正常显示 --
-
-
-### 使用 docker
-
-以下命令中替换你的`API_SECRECT`和`SHORT_NAME`，外部端口可自定义，需要和前端保持一致
-
-```shell
-docker run -d --name disqus-proxy -p 5509:5509 \
--e API_SECRECT=your_serect \
--e SHORT_NAME=your_short_name \
-ycwalker/disqus-proxy-server 
-
-```
-
-### 使用docker-compose
-
-复制本项目的[docker-compose.yml](https://github.com/ciqulover/disqus-proxy-server/blob/master/docker-compose.yml)文件至服务器上
-或者克隆本项目`git clone https://github.com/ciqulover/disqus-proxy-server`
-
-替换docker-compose.yml中你的`API_SECRECT`和`SHORT_NAME`
-
-##### 在包含docker-compose.yml的目录中启动
-```
-docker-compose up -d
-```
 
 ### 其他
 
