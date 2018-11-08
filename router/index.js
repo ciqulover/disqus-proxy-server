@@ -68,7 +68,9 @@ router.post('/api/createComment', async function (ctx) {
   const {message, thread, author_name, author_email, parent} = body
   const params = new URLSearchParams()
   params.append('api_key', api_key)
-  params.append('parent', parent)
+  if (parent !== undefined) {
+    params.append('parent', parent)
+  }
   params.append('message', message)
   params.append('thread', thread)
   params.append('author_name', author_name)
