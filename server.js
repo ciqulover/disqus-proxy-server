@@ -24,7 +24,7 @@ app.use(cors())
 
 if (config.proxy) {
   app.proxy = true
-  app.listen('127.0.0.1', config.port, log)
+  app.listen(config.port, '127.0.0.1', log)
 } else app.listen(config.port, log)
 
 function log() {
